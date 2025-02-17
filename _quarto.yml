@@ -1,0 +1,20 @@
+project:
+    type: website
+    output-dir: docs
+    
+website:
+    navbar:
+        background: MediumPurple
+        search: false
+        title: Lenka Harmáčková
+        pinned: true
+        toggle-position: right
+        right: 
+          - text: 'About'
+            href: index.qmd
+          - text: 'Publications'
+            href: index.qmd#sec-publications
+          - text: 'Teaching'
+            href: index.qmd#sec-teaching
+        back-to-top-navigation: true
+    page-footer: "Lenka Harmáčková © 2025"
