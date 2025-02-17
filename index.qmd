@@ -31,14 +31,16 @@ My research concerns evolution and geographic variability in functional traits o
 **Ornithological station ORNIS**\
 Comenius Museum in Prerov\
 Bezručova 10\
-750 02 Přerov
+750 02 Přerov\
+harmackova\[at\]prerovmuzeum.cz
 :::
+
 ::: {.column width="50%"}
 **Department of Zoology**\
 Faculty of Science, Palacký University\
 17. listopadu 50\
 779 00 Olomouc\
-**email:** lenka.harmackova\[at\]upol.cz
+lenka.harmackova\[at\]upol.cz
 :::
 :::::
 
