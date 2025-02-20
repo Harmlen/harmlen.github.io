@@ -1,0 +1,35 @@
+---
+title: "Přerov čtverce"
+format: html
+editor: visual
+---
+
+## Faunisticke ctverce pro Prerov {#sec-about}
+
+```{r}
+library(leaflet)
+library(sf)
+library(RCzechia)
+library(tidyverse)
+
+# katastr Prerov
+Prerov <- RCzechia::obce_polygony() %>%
+  filter(NAZ_OBEC == "Přerov")
+
+# faunisticke ctverce (male = cislo s pismenem)
+sq.Prerov.high <- st_join(KFME_grid("high"), Prerov, left = F)
+
+# extra detailni deleni ctvercu 
+sq.Prerov.aaaa <- st_make_grid(sq.Prerov.high, n = c(24, 24))
+
+# interaktivni mapa
+# seda = katastr Prerov
+# cervena = detailni ctverce
+# modra = male faunisticke ctverce, kliknutim se zobrazi cislo
+leaflet(data = republika("low")) %>% 
+  addProviderTiles("CartoDB.Positron") %>% 
+  addPolygons(data = Prerov, color = "gray", weight = 1, fillOpacity = 0) %>% 
+  addPolygons(data = sq.Prerov.aaaa, color = "red", weight = 1, fillOpacity = 0) %>% 
+  addPolygons(data = sq.Prerov.high, color = "blue", weight = 1, fillOpacity = 0, popup = ~as.character(ctverec)) %>%
+  leaflet.extras::addResetMapButton()
+```

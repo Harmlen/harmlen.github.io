@@ -26,5 +26,19 @@
     "title": "Lenka Harmáčková",
     "section": "Teaching",
     "text": "Teaching\nIntroduction to data analysis in R language"
+  },
+  {
+    "objectID": "prerov.html",
+    "href": "prerov.html",
+    "title": "Přerov čtverce",
+    "section": "",
+    "text": "library(leaflet)\nlibrary(sf)\n\nLinking to GEOS 3.12.2, GDAL 3.9.3, PROJ 9.4.1; sf_use_s2() is TRUE\n\nlibrary(RCzechia)\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.1     ✔ tibble    3.2.1\n✔ lubridate 1.9.4     ✔ tidyr     1.3.1\n✔ purrr     1.0.2     \n\n\n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\n# katastr Prerov\nPrerov &lt;- RCzechia::obce_polygony() %&gt;%\n  filter(NAZ_OBEC == \"Přerov\")\n\nRCzechia: downloading remote dataset.\n\n# faunisticke ctverce (male = cislo s pismenem)\nsq.Prerov.high &lt;- st_join(KFME_grid(\"high\"), Prerov, left = F)\n\n# extra detailni deleni ctvercu \nsq.Prerov.aaaa &lt;- st_make_grid(sq.Prerov.high, n = c(24, 24))\n\n# interaktivni mapa\n# seda = katastr Prerov\n# cervena = detailni ctverce\n# modra = male faunisticke ctverce, kliknutim se zobrazi cislo\nleaflet(data = republika(\"low\")) %&gt;% \n  addProviderTiles(\"CartoDB.Positron\") %&gt;% \n  addPolygons(data = Prerov, color = \"gray\", weight = 1, fillOpacity = 0) %&gt;% \n  addPolygons(data = sq.Prerov.aaaa, color = \"red\", weight = 1, fillOpacity = 0) %&gt;% \n  addPolygons(data = sq.Prerov.high, color = \"blue\", weight = 1, fillOpacity = 0, popup = ~as.character(ctverec)) %&gt;%\n  leaflet.extras::addResetMapButton()"
+  },
+  {
+    "objectID": "prerov.html#sec-about",
+    "href": "prerov.html#sec-about",
+    "title": "Přerov čtverce",
+    "section": "",
+    "text": "library(leaflet)\nlibrary(sf)\n\nLinking to GEOS 3.12.2, GDAL 3.9.3, PROJ 9.4.1; sf_use_s2() is TRUE\n\nlibrary(RCzechia)\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.1     ✔ tibble    3.2.1\n✔ lubridate 1.9.4     ✔ tidyr     1.3.1\n✔ purrr     1.0.2     \n\n\n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\n# katastr Prerov\nPrerov &lt;- RCzechia::obce_polygony() %&gt;%\n  filter(NAZ_OBEC == \"Přerov\")\n\nRCzechia: downloading remote dataset.\n\n# faunisticke ctverce (male = cislo s pismenem)\nsq.Prerov.high &lt;- st_join(KFME_grid(\"high\"), Prerov, left = F)\n\n# extra detailni deleni ctvercu \nsq.Prerov.aaaa &lt;- st_make_grid(sq.Prerov.high, n = c(24, 24))\n\n# interaktivni mapa\n# seda = katastr Prerov\n# cervena = detailni ctverce\n# modra = male faunisticke ctverce, kliknutim se zobrazi cislo\nleaflet(data = republika(\"low\")) %&gt;% \n  addProviderTiles(\"CartoDB.Positron\") %&gt;% \n  addPolygons(data = Prerov, color = \"gray\", weight = 1, fillOpacity = 0) %&gt;% \n  addPolygons(data = sq.Prerov.aaaa, color = \"red\", weight = 1, fillOpacity = 0) %&gt;% \n  addPolygons(data = sq.Prerov.high, color = \"blue\", weight = 1, fillOpacity = 0, popup = ~as.character(ctverec)) %&gt;%\n  leaflet.extras::addResetMapButton()"
   }
 ]
