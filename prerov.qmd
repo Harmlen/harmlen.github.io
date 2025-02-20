@@ -1,12 +1,17 @@
 ---
 title: "Přerov čtverce"
-format: html
+format: 
+  html:
+    code-fold: true
 editor: visual
 ---
 
 ## Faunisticke ctverce pro Prerov {#sec-about}
 
 ```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+#| 
 library(leaflet)
 library(sf)
 library(RCzechia)
