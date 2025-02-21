@@ -19,6 +19,7 @@ Modrá = malé faunistické čtverce, kliknutím se zobrazí číslo.
 #| code-summary: "Show the code"
 #| 
 library(leaflet)
+library(leaflet.extras)
 library(sf)
 library(RCzechia)
 library(tidyverse)
@@ -45,9 +46,15 @@ leaflet(data = republika("low")) %>%
   leaflet.extras::addResetMapButton()
 ```
 
+.
+
+.
+
 34 čtverců, které zasahují na katastr Přerova z více než 30 %.
 
 1 čtverec = 4 předchozí detailní čtverce.
+
+Kliknutím na ikonu "Center map on your location" ukáze aktuální pozici dle GPS.
 
 ```{r echo = FALSE, message = FALSE, error = FALSE, warning = FALSE, result = 'hide', fig.keep = 'all'}
 sq.Prerov.aaa <- st_make_grid(sq.Prerov.high, n = c(12, 12))
@@ -63,5 +70,6 @@ leaflet(data = republika("low")) %>%
   addProviderTiles("CartoDB.Positron") %>% 
   addPolygons(data = Prerov, color = "black", weight = 1, fillOpacity = 0) %>% 
   addPolygons(data = sq.Prerov.aaa[subset(d, Overlap >= 30)$ID], color = "red", weight = 1, fillOpacity = 0) %>% 
-  leaflet.extras::addResetMapButton()
+  leaflet.extras::addResetMapButton() %>%
+  addControlGPS(options = gpsOptions(activate = T, autoCenter = T))
 ```
