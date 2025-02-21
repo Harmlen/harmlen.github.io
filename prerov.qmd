@@ -6,9 +6,15 @@ format:
 editor: visual
 ---
 
-## Faunisticke ctverce pro Prerov {#sec-about}
+## Faunistické čtverce pro Přerov {#sec-about}
 
-```{r}
+Černá = katastr Přerov.
+
+Červená = detailní čtverce.
+
+Modrá = malé faunistické čtverce, kliknutím se zobrazí číslo.
+
+```{r echo = FALSE, message = FALSE, error = FALSE, warning = FALSE, result = 'hide', fig.keep = 'all'}
 #| code-fold: true
 #| code-summary: "Show the code"
 #| 
@@ -33,8 +39,29 @@ sq.Prerov.aaaa <- st_make_grid(sq.Prerov.high, n = c(24, 24))
 # modra = male faunisticke ctverce, kliknutim se zobrazi cislo
 leaflet(data = republika("low")) %>% 
   addProviderTiles("CartoDB.Positron") %>% 
-  addPolygons(data = Prerov, color = "gray", weight = 1, fillOpacity = 0) %>% 
+  addPolygons(data = Prerov, color = "black", weight = 1, fillOpacity = 0) %>% 
   addPolygons(data = sq.Prerov.aaaa, color = "red", weight = 1, fillOpacity = 0) %>% 
   addPolygons(data = sq.Prerov.high, color = "blue", weight = 1, fillOpacity = 0, popup = ~as.character(ctverec)) %>%
+  leaflet.extras::addResetMapButton()
+```
+
+34 čtverců, které zasahují na katastr Přerova z více než 30 %.
+
+1 čtverec = 4 předchozí detailní čtverce.
+
+```{r echo = FALSE, message = FALSE, error = FALSE, warning = FALSE, result = 'hide', fig.keep = 'all'}
+sq.Prerov.aaa <- st_make_grid(sq.Prerov.high, n = c(12, 12))
+
+d <- data.frame(ID = 1:length(sq.Prerov.aaa), Overlap = 0)
+
+for(i in 1:length(sq.Prerov.aaa)) {
+area <- st_area(st_intersection(sq.Prerov.aaa[i], Prerov)) / st_area(sq.Prerov.aaa[i]) * 100
+  if(length(area) == 1) {d[i, ]$Overlap <- area}
+}
+
+leaflet(data = republika("low")) %>% 
+  addProviderTiles("CartoDB.Positron") %>% 
+  addPolygons(data = Prerov, color = "black", weight = 1, fillOpacity = 0) %>% 
+  addPolygons(data = sq.Prerov.aaa[subset(d, Overlap >= 30)$ID], color = "red", weight = 1, fillOpacity = 0) %>% 
   leaflet.extras::addResetMapButton()
 ```
