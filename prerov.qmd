@@ -6,57 +6,58 @@ format:
 editor: visual
 ---
 
-## Faunistické čtverce pro Přerov {#sec-about}
+## Ptáci Přerova {#sec-about}
 
-Černá = katastr Přerov.
+Návrh metodiky k hnízdnímu atlasu ptáků Přerova.
 
-Červená = detailní čtverce.
+.
 
-Modrá = malé faunistické čtverce, kliknutím se zobrazí číslo.
+### Faunistické čtverce
+
+1 čtverec = 1/64 faunistického čtverce = 1/4 LSD čtverce (1,5 x 1,5 km)
+
+41 čtverců, které zasahují na katastr Přerova alespoň z 15 %.
+
+.
+
+### Metodika sčítání
+
+Min. 2 návštěvy čtverce během hnízdního období (duben až červen) po dobu tří let (2026 až 2028, rok 2025 je zkušební).
+
+Projít všechny biotopy.
+
+Zadávání dat do AVIFu, přesné místo výskytu pozorovaných jedinců, hnízdní kategorie.
+
+Zahrnutí záznamů z veřejných databází (AVIF, eBIRD, NDOP).
+
+.
+
+
+### Výsledky
+
+Publikace (městský atlas).
+
+Kvadrátová mapa rozšíření.
+
+Odhady početnosti.
+
+Složení společenstev dle biotopů.
+
+Rešerže historických záznamů.
+
 
 ```{r echo = FALSE, message = FALSE, error = FALSE, warning = FALSE, result = 'hide', fig.keep = 'all'}
-#| code-fold: true
-#| code-summary: "Show the code"
-#| 
 library(leaflet)
 library(leaflet.extras)
 library(sf)
 library(RCzechia)
 library(tidyverse)
 
-# katastr Prerov
 Prerov <- RCzechia::obce_polygony() %>%
   filter(NAZ_OBEC == "Přerov")
 
-# faunisticke ctverce (male = cislo s pismenem)
-sq.Prerov.high <- st_join(KFME_grid("high"), Prerov, left = F)
+sq.Prerov.high <- st_join(KFME_grid("high"), Prerov, left = F) # male ctverce (cisla a pismeno)
 
-# extra detailni deleni ctvercu 
-sq.Prerov.aaaa <- st_make_grid(sq.Prerov.high, n = c(24, 24))
-
-# interaktivni mapa
-# seda = katastr Prerov
-# cervena = detailni ctverce
-# modra = male faunisticke ctverce, kliknutim se zobrazi cislo
-leaflet(data = republika("low")) %>% 
-  addProviderTiles("CartoDB.Positron") %>% 
-  addPolygons(data = Prerov, color = "black", weight = 1, fillOpacity = 0) %>% 
-  addPolygons(data = sq.Prerov.aaaa, color = "red", weight = 1, fillOpacity = 0) %>% 
-  addPolygons(data = sq.Prerov.high, color = "blue", weight = 1, fillOpacity = 0, popup = ~as.character(ctverec)) %>%
-  leaflet.extras::addResetMapButton()
-```
-
-.
-
-.
-
-34 čtverců, které zasahují na katastr Přerova z více než 30 %.
-
-1 čtverec = 4 předchozí detailní čtverce.
-
-Kliknutím na ikonu "Center map on your location" ukáze aktuální pozici dle GPS.
-
-```{r echo = FALSE, message = FALSE, error = FALSE, warning = FALSE, result = 'hide', fig.keep = 'all'}
 sq.Prerov.aaa <- st_make_grid(sq.Prerov.high, n = c(12, 12))
 
 d <- data.frame(ID = 1:length(sq.Prerov.aaa), Overlap = 0)
@@ -66,10 +67,10 @@ area <- st_area(st_intersection(sq.Prerov.aaa[i], Prerov)) / st_area(sq.Prerov.a
   if(length(area) == 1) {d[i, ]$Overlap <- area}
 }
 
-leaflet(data = republika("low")) %>% 
-  addProviderTiles("CartoDB.Positron") %>% 
-  addPolygons(data = Prerov, color = "black", weight = 1, fillOpacity = 0) %>% 
-  addPolygons(data = sq.Prerov.aaa[subset(d, Overlap >= 30)$ID], color = "red", weight = 1, fillOpacity = 0) %>% 
+leaflet(data = Prerov) %>% 
+  addTiles() %>% 
+  addPolygons(data = Prerov, color = "red", weight = 1, fillOpacity = 0) %>% 
+  addPolygons(data = sq.Prerov.aaa[subset(d, Overlap >= 15)$ID], color = "black", weight = 1, fillOpacity = 0) %>% 
   leaflet.extras::addResetMapButton() %>%
   addControlGPS(options = gpsOptions(activate = T, autoCenter = T))
 ```
