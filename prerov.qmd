@@ -32,7 +32,6 @@ Zahrnutí záznamů z veřejných databází (AVIF, eBIRD, NDOP).
 
 .
 
-
 ### Výsledky
 
 Publikace (městský atlas).
@@ -44,7 +43,6 @@ Odhady početnosti.
 Složení společenstev dle biotopů.
 
 Rešerže historických záznamů.
-
 
 ```{r echo = FALSE, message = FALSE, error = FALSE, warning = FALSE, result = 'hide', fig.keep = 'all'}
 library(leaflet)
@@ -68,9 +66,12 @@ area <- st_area(st_intersection(sq.Prerov.aaa[i], Prerov)) / st_area(sq.Prerov.a
 }
 
 leaflet(data = Prerov) %>% 
-  addTiles() %>% 
+  addTiles("https://api.mapy.cz/v1/maptiles/outdoor/256/{z}/{x}/{y}?lang=cs&apikey=iN8pshQVo1s9j77jzuWh0jx4fm7Ed5wo7SgBual6QEw", group = 'Turisticka') %>%
+  addTiles("https://api.mapy.cz/v1/maptiles/aerial/256/{z}/{x}/{y}?lang=cs&apikey=iN8pshQVo1s9j77jzuWh0jx4fm7Ed5wo7SgBual6QEw", group = 'Letecka') %>%
   addPolygons(data = Prerov, color = "red", weight = 1, fillOpacity = 0) %>% 
   addPolygons(data = sq.Prerov.aaa[subset(d, Overlap >= 15)$ID], color = "black", weight = 1, fillOpacity = 0) %>% 
   leaflet.extras::addResetMapButton() %>%
-  addControlGPS(options = gpsOptions(activate = T, autoCenter = T))
+  addControlGPS(options = gpsOptions(activate = T, autoCenter = T)) %>%
+  addLayersControl(baseGroups = c('Turisticka', 'Letecka'), options = layersControlOptions(collapsed = FALSE)) %>%
+  addControl(map, html = '<a href="http://mapy.cz/" target="_blank"><img src="https://api.mapy.cz/img/api/logo.svg" width="100px"/></a>', position = "bottomleft")
 ```
