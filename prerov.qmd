@@ -4,6 +4,8 @@ format:
   html:
     code-fold: true
 editor: visual
+
+# last edit 10.04.2025
 ---
 
 ## Ptáci Přerova {#sec-about}
@@ -65,11 +67,35 @@ area <- st_area(st_intersection(sq.Prerov.aaa[i], Prerov)) / st_area(sq.Prerov.a
   if(length(area) == 1) {d[i, ]$Overlap <- area}
 }
 
+sq.Prerov.fin <- st_sf(geometry = sq.Prerov.aaa[subset(d, Overlap >= 15)$ID])
+
+sq.Prerov.fin$Name <- c('J1', 'J2', 'J4',
+                        'I1', 'I2', 'I3', 'I4', 'I5', 'I6',
+                        'H1', 'H2', 'H3', 'H4', 'H5', 'H6',
+                        'G1', 'G2', 'G3', 'G4', 'G5', 'G6',
+                        'F2', 'F3', 'F4', 'F5', 'F6',
+                        'E2', 'E3', 'E4', 'E5',
+                        'D1', 'D2', 'D3', 'D4', 'D5',
+                        'C2', 'C3',
+                        'B2', 'B3', 'B4',
+                        'A3')
+sq.Prerov.fin$Observer <- c('NA', 'NA', 'Martin Vymazal',
+                        'NA', 'NA', 'NA', 'Martin Vymazal', 'Martin Vymazal', 'Martin Vymazal',
+                        'NA', 'NA', 'NA', 'Martin Vymazal', 'Martin Vymazal', 'Martin Vymazal',
+                        'NA', 'NA', 'NA', 'NA', 'NA', 'NA',
+                        'NA', 'NA', 'Josef Chytil', 'Josef Chytil', 'NA',
+                        'NA', 'NA', 'Josef Chytil', 'Josef Chytil',
+                        'NA', 'NA', 'NA', 'Josef Chytil', 'Josef Chytil',
+                        'NA', 'NA',
+                        'NA', 'NA', 'NA',
+                        'NA')
+
+
 leaflet(data = Prerov) %>% 
   addTiles("https://api.mapy.cz/v1/maptiles/outdoor/256/{z}/{x}/{y}?lang=cs&apikey=iN8pshQVo1s9j77jzuWh0jx4fm7Ed5wo7SgBual6QEw", group = 'Turisticka') %>%
   addTiles("https://api.mapy.cz/v1/maptiles/aerial/256/{z}/{x}/{y}?lang=cs&apikey=iN8pshQVo1s9j77jzuWh0jx4fm7Ed5wo7SgBual6QEw", group = 'Letecka') %>%
   addPolygons(data = Prerov, color = "red", weight = 1, fillOpacity = 0) %>% 
-  addPolygons(data = sq.Prerov.aaa[subset(d, Overlap >= 15)$ID], color = "black", weight = 1, fillOpacity = 0) %>% 
+  addPolygons(data = sq.Prerov.fin, color = "black", weight = 1, fillOpacity = 0, popup = ~ paste0("<b>ID čtverce: ", Name, "</b><br>Sčitatel: ", Observer, "<br>")) %>% 
   leaflet.extras::addResetMapButton() %>%
   addControlGPS(options = gpsOptions(activate = T, autoCenter = T)) %>%
   addLayersControl(baseGroups = c('Turisticka', 'Letecka'), options = layersControlOptions(collapsed = FALSE)) %>%
