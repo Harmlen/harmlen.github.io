@@ -20,31 +20,13 @@ Návrh metodiky k hnízdnímu atlasu ptáků Přerova.
 
 41 čtverců, které zasahují na katastr Přerova alespoň z 15 %.
 
-.
+**Ke stažení:**
 
-### Metodika sčítání
+[PDF s tiskovými podklady](https://upolomouc-my.sharepoint.com/:b:/g/personal/harmle00_upol_cz/Ee9iPhVDJZZEvf9pMmaSvW4BlUes57PuG6uXZ5E27jEXfA?e=nMg14e) jednotlivých čtverců (turistická a ortofoto mapa z mapy.cz)
 
-Min. 2 návštěvy čtverce během hnízdního období (duben až červen) po dobu tří let (2026 až 2028, rok 2025 je zkušební).
+GPX pro jednotlivé čtverce pro nahrání do mapy.cz nebo Google maps. Po kliknutí na čtverec na mapě se zobrazí informace o ID čtverce, sčitateli a odkaz na stažení. K dispozici je i [ZIP se všemi čtverci](https://upolomouc-my.sharepoint.com/:u:/g/personal/harmle00_upol_cz/EfQYV6ixbMdMr7qUDaHIeMwBGrRowisuSaBQGnyf_UwjWQ?e=aFzNf6).
 
-Projít všechny biotopy.
-
-Zadávání dat do AVIFu, přesné místo výskytu pozorovaných jedinců, hnízdní kategorie.
-
-Zahrnutí záznamů z veřejných databází (AVIF, eBIRD, NDOP).
-
-.
-
-### Výsledky
-
-Publikace (městský atlas).
-
-Kvadrátová mapa rozšíření.
-
-Odhady početnosti.
-
-Složení společenstev dle biotopů.
-
-Rešerže historických záznamů.
+**Návod k zobrazení v mapy.cz:** Přihlašte se do mapy.cz. Na pc zvolte vpravo dole ikonu Nástrojte a vyberte Import GPX. Na mobilu zvolte rozbalovací nabídku, vyberte Moje mapy a poté IMPORT GPX. Vyberte ze složky jeden nebo více souborů GPX. Nezapomeňte si mapu s načtenými čtverci uložit.
 
 ```{r echo = FALSE, message = FALSE, error = FALSE, warning = FALSE, result = 'hide', fig.keep = 'all'}
 library(leaflet)
@@ -80,8 +62,8 @@ sq.Prerov.fin$Name <- c('J1', 'J2', 'J4',
                         'B2', 'B3', 'B4',
                         'A3')
 sq.Prerov.fin$Observer <- c('NA', 'NA', 'Martin Vymazal',
-                        'NA', 'NA', 'NA', 'Martin Vymazal', 'Martin Vymazal', 'Martin Vymazal',
-                        'NA', 'NA', 'NA', 'Martin Vymazal', 'Martin Vymazal', 'Martin Vymazal',
+                        'Lenka Harmáčková', 'NA', 'NA', 'Martin Vymazal', 'Martin Vymazal', 'Martin Vymazal',
+                        'Lenka Harmáčková', 'NA', 'NA', 'Martin Vymazal', 'Martin Vymazal', 'Martin Vymazal',
                         'NA', 'NA', 'NA', 'NA', 'NA', 'NA',
                         'NA', 'NA', 'Josef Chytil', 'Josef Chytil', 'NA',
                         'NA', 'NA', 'Josef Chytil', 'Josef Chytil',
@@ -89,15 +71,61 @@ sq.Prerov.fin$Observer <- c('NA', 'NA', 'Martin Vymazal',
                         'NA', 'NA',
                         'NA', 'NA', 'NA',
                         'NA')
+sq.Prerov.fin$Color <- c('black', 'black', 'blue',
+                            'blue', 'black', 'black', 'blue', 'blue', 'blue',
+                            'blue', 'black', 'black', 'blue', 'blue', 'blue',
+                            'black', 'black', 'black', 'black', 'black', 'black',
+                            'black', 'black', 'blue', 'blue', 'black',
+                            'black', 'black', 'blue', 'blue',
+                            'black', 'black', 'black', 'blue', 'blue',
+                            'black', 'black',
+                            'black', 'black', 'black',
+                            'black')
+sq.Prerov.fin$Link <- c('https://upolomouc-my.sharepoint.com/:u:/g/personal/harmle00_upol_cz/EdhAuH_tl_ZElmE002RTJ9YBxjpjqpRD573tvX4_f33flQ?e=qkbYLA', 'https://upolomouc-my.sharepoint.com/:u:/g/personal/harmle00_upol_cz/EZPdNdibzD5NpNl9DeAq-A4BK7k3QxaqaaaESo3CAmWdAQ?e=UVaMHH', 'https://upolomouc-my.sharepoint.com/:u:/g/personal/harmle00_upol_cz/EV3cSjyQ7O5AkdqC1IV77rUBwE7qLLlRkZEyVvzjnZeu3w?e=Znehmm',
+                        'https://upolomouc-my.sharepoint.com/:u:/g/personal/harmle00_upol_cz/EWsCOA1XCexEuhNY2VCdApQBbCj1qdJVn8nxrB6srWbVFA?e=4Zjt7Y', 'https://upolomouc-my.sharepoint.com/:u:/g/personal/harmle00_upol_cz/EdprwAJWuppIsjgsbZUupG8B_utZRAfgcHfJmxx6YtWtZw?e=b4fSfK', 'https://upolomouc-my.sharepoint.com/:u:/g/personal/harmle00_upol_cz/ERAp8l3ecmFPmpPxbLw_tssBjkYPgwncCdnEndCj3iB2-Q?e=gpQqxt', 'https://upolomouc-my.sharepoint.com/:u:/g/personal/harmle00_upol_cz/EWewue1_99tFud-xXtWl-a8B0Sq2NoZndzrvn7eTGrV2ow?e=6uB1eX', 'https://upolomouc-my.sharepoint.com/:u:/g/personal/harmle00_upol_cz/ERSa-jlPH7NMoy1Qe3HlbbABtlCXZz5h_1dhaF4S7c80xw?e=uFJ5D0', 'https://upolomouc-my.sharepoint.com/:u:/g/personal/harmle00_upol_cz/Edj5YEVUWL9IpN8DljzN2CQBgmICVK6lJoqFjnox5Sfcgw?e=coedMa',
+                        'https://upolomouc-my.sharepoint.com/:u:/g/personal/harmle00_upol_cz/EZFsXcwsj4BPo0wAVJkQf4UBGRg03YIuGH5rJhjlEdbozg?e=2jZIzx', 'https://upolomouc-my.sharepoint.com/:u:/g/personal/harmle00_upol_cz/EZJNZ-vuN1RAqldTtNRVDDUB8sZhzQVGz2vZgQWufdN4OQ?e=ENHwu7', 'https://upolomouc-my.sharepoint.com/:u:/g/personal/harmle00_upol_cz/EX5OVVpeiA1DlU1I_AuDoz4B1cseNpLe6k_cw07iCifI3g?e=DEkrQc', 'https://upolomouc-my.sharepoint.com/:u:/g/personal/harmle00_upol_cz/EQbnkYk8uAtCpcMtLYUWkjoB_EuwB2Z0r0kKB8-KK6TP-g?e=YkfI20', 'https://upolomouc-my.sharepoint.com/:u:/g/personal/harmle00_upol_cz/Efkck7GiLMZMqoXCOOHzxDYBNS8EnaS01KtnsiEt1dQSgg?e=0Gke4N', 'https://upolomouc-my.sharepoint.com/:u:/g/personal/harmle00_upol_cz/EXvZqkH9cgtOjOlFGSn3Nx4BTPKcB0KzB3slDmGDf3HRUA?e=JM92uL',
+                        'https://upolomouc-my.sharepoint.com/:u:/g/personal/harmle00_upol_cz/ETygdL6LhthDjO73dIDcOTgBC2xOUn7GLMVawBf0IHq13A?e=5b5TZS', 'https://upolomouc-my.sharepoint.com/:u:/g/personal/harmle00_upol_cz/EShU0NcML6pNiVNIsljsJEUBLgbNUvRxNHMFHWw7xzJk0A?e=YtHXoY', 'https://upolomouc-my.sharepoint.com/:u:/g/personal/harmle00_upol_cz/EVRdIIFaTORAmIsHrueCXdUBPLrkMapWI2tuq7Rh1zeyKw?e=9SUQzG', 'https://upolomouc-my.sharepoint.com/:u:/g/personal/harmle00_upol_cz/EeRoyDsAPClGiYfLpAQjrbcBlDzrIpbuDRug6WMkPSADqQ?e=UqTatb', 'https://upolomouc-my.sharepoint.com/:u:/g/personal/harmle00_upol_cz/Ef_-TM-Ys_1Oj_fPrvo5OYcBqpbfw3Z2yuGB6cfLAOMFjA?e=umhxdv', 'https://upolomouc-my.sharepoint.com/:u:/g/personal/harmle00_upol_cz/EXkDuhWeTq1KvZNsr9j0SGsBTjET2OjIzwqkxUFoSbxjiQ?e=mrwa5U',
+                        'https://upolomouc-my.sharepoint.com/:u:/g/personal/harmle00_upol_cz/EUWU816K4cBDm-7aJq3tYvgBHvSIC26OPT-ubWluxqlUvw?e=ZVvjZ7', 'https://upolomouc-my.sharepoint.com/:u:/g/personal/harmle00_upol_cz/EffPqU_MkqlAs97fVUxp1N0Bf4MMs-W0TCi3y75Nvoxo9g?e=dejpYt', 'https://upolomouc-my.sharepoint.com/:u:/g/personal/harmle00_upol_cz/ES-UV8icTsJDmS6ZfRoOpksBx3N3sYSOfsteruTeKG98nA?e=f01cFL', 'https://upolomouc-my.sharepoint.com/:u:/g/personal/harmle00_upol_cz/EYgaAelwnXtKrxuOA1Z4-uQBYVOWbEvNJXfNGx9-dysqtQ?e=eqgLcE', 'https://upolomouc-my.sharepoint.com/:u:/g/personal/harmle00_upol_cz/EV70pupdYDpLpSrbD-blddsBHWzq0xP8_EkjcpIFrxNZew?e=BL1Xlu',
+                        'https://upolomouc-my.sharepoint.com/:u:/g/personal/harmle00_upol_cz/Ec3fxx-GvaBNvFR26hTgQrUBCK2Jj3ICUxA_8ZHWng79mA?e=NZmHYN', 'https://upolomouc-my.sharepoint.com/:u:/g/personal/harmle00_upol_cz/EcETLp0eb5tPpkA4bI0YdtABfdGTO3gs6hXJjaSjQWSfzA?e=LaqP6y', 'https://upolomouc-my.sharepoint.com/:u:/g/personal/harmle00_upol_cz/EUNDrNWTbbBDmIyl5uI_QrcBvL1ejJ9HqF2j0E1viHG4Ag?e=MLVzz8', 'https://upolomouc-my.sharepoint.com/:u:/g/personal/harmle00_upol_cz/EZkooBvT-sRAsRNLTogfmCAB7hpEzTfhjctYFVyupZPk_Q?e=rpEf4c',
+                        'https://upolomouc-my.sharepoint.com/:u:/g/personal/harmle00_upol_cz/EfWC0f1Iv6pCt-A0mEUbfMgBqoUmd9G9m91Flbd_-5Cn0A?e=Pm4W7v', 'https://upolomouc-my.sharepoint.com/:u:/g/personal/harmle00_upol_cz/Eclhz2NPbHxAtl5PejEyWywBZkgaY1d1rjhJtAi0P9c3nA?e=EozYbn', 'https://upolomouc-my.sharepoint.com/:u:/g/personal/harmle00_upol_cz/EZYdaoPXo0ZLiMKoVz6gX_kBJnAl5Js4WDQANTuOAu6taA?e=8ri3tp', 'https://upolomouc-my.sharepoint.com/:u:/g/personal/harmle00_upol_cz/EaGLL6T5kmxEheeFruIBVyYBWzYVxGzlfi_jc1zSyseX6w?e=6HmzgF', 'https://upolomouc-my.sharepoint.com/:u:/g/personal/harmle00_upol_cz/EfZsDvHvj9VGp96t2ahfROgBXEDs3yJ95WmcBXzAZDy1mQ?e=Jf2ACc',
+                        'https://upolomouc-my.sharepoint.com/:u:/g/personal/harmle00_upol_cz/EYshl4coZC5EitG4IhoW6JkBJASwO4B3P69QPc-1sWOiDA?e=fVIUiR', 'https://upolomouc-my.sharepoint.com/:u:/g/personal/harmle00_upol_cz/EX7fqk4Jds1Bv-UhNnjWb9MBSbOhpIi1YNuXsLMXWXDNWg?e=vn9Vkb',
+                        'https://upolomouc-my.sharepoint.com/:u:/g/personal/harmle00_upol_cz/ERwPjqvgHMJDoNPpqDx8AmIBx4kCtO3utwLsHLbEvqpEGg?e=sKMGGH', 'https://upolomouc-my.sharepoint.com/:u:/g/personal/harmle00_upol_cz/ESX9iAMChQBMncru0J8U-UIBIN7hZNTPfdSk9EG1CHCDCg?e=dDKgcK', 'https://upolomouc-my.sharepoint.com/:u:/g/personal/harmle00_upol_cz/EWpJ07wKYiBBvWzkOOYGQxEBDULPZzR4HKMw1GnSaqqs2g?e=OMnHlQ',
+                        'https://upolomouc-my.sharepoint.com/:u:/g/personal/harmle00_upol_cz/EWw16apflyRGsMDV7johgvYB3gEn2pjjc30jzVTqnTG9sw?e=4zCAlc')
+
 
 
 leaflet(data = Prerov) %>% 
   addTiles("https://api.mapy.cz/v1/maptiles/outdoor/256/{z}/{x}/{y}?lang=cs&apikey=iN8pshQVo1s9j77jzuWh0jx4fm7Ed5wo7SgBual6QEw", group = 'Turisticka') %>%
   addTiles("https://api.mapy.cz/v1/maptiles/aerial/256/{z}/{x}/{y}?lang=cs&apikey=iN8pshQVo1s9j77jzuWh0jx4fm7Ed5wo7SgBual6QEw", group = 'Letecka') %>%
   addPolygons(data = Prerov, color = "red", weight = 1, fillOpacity = 0) %>% 
-  addPolygons(data = sq.Prerov.fin, color = "black", weight = 1, fillOpacity = 0, popup = ~ paste0("<b>ID čtverce: ", Name, "</b><br>Sčitatel: ", Observer, "<br>")) %>% 
+  addPolygons(data = sq.Prerov.fin, color = sq.Prerov.fin$Color, weight = 1, popup = ~ paste0("<b>ID čtverce: ", Name, "</b><br>Sčitatel: ", Observer, "<br><a href=", Link, ">Stáhnout GPX</a><br>")) %>% 
   leaflet.extras::addResetMapButton() %>%
   addControlGPS(options = gpsOptions(activate = T, autoCenter = T)) %>%
   addLayersControl(baseGroups = c('Turisticka', 'Letecka'), options = layersControlOptions(collapsed = FALSE)) %>%
   addControl(map, html = '<a href="http://mapy.cz/" target="_blank"><img src="https://api.mapy.cz/img/api/logo.svg" width="100px"/></a>', position = "bottomleft")
+
 ```
+
+### Metodika sčítání
+
+Min. 2 návštěvy čtverce během hnízdního období (duben až červen) po dobu tří let (2026 až 2028, rok 2025 je zkušební).
+
+Projít všechny biotopy.
+
+Zadávání dat do AVIFu, přesné místo výskytu pozorovaných jedinců, hnízdní kategorie.
+
+Zahrnutí záznamů z veřejných databází (AVIF, eBIRD, NDOP).
+
+.
+
+### Výsledky
+
+Publikace (městský atlas).
+
+Kvadrátová mapa rozšíření.
+
+Odhady početnosti.
+
+Složení společenstev dle biotopů.
+
+Rešerže historických záznamů.
